@@ -7,6 +7,19 @@ function Editprofile_Page() {
   function navigateTo() {
     navigate("/info");
   }
+
+  function selectFile(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      const preview = document.getElementById("preview");
+      preview.src = reader.result;
+    };
+
+    reader.readAsDataURL(file);
+  }
+  
   return (
     <div
       style={{
@@ -60,14 +73,18 @@ function Editprofile_Page() {
                   height: "150px", // รักษาอัตราส่วน
                 }}
               >
-                <img
-                  src="https://i.pinimg.com/564x/ed/84/3b/ed843b02bf7de031107f058040386173.jpg"
-                  style={{
-                    width: "100%", // ปรับขนาดรูปภาพให้ทั้งหมดแสดงผลในตัว div
-                    height: "100%", // ปรับขนาดรูปภาพให้ทั้งหมดแสดงผลในตัว div
-                    borderRadius: "50%", // ทำให้รูปภาพเป็นรูปร่างวงกลม
-                  }}
-                />
+            <div>
+            <img width="300px" id="preview" />
+            <TextField
+              type="file"
+              margin="normal"
+              id="file"
+              required
+              fullWidth
+              autoFocus
+              onChange={selectFile}
+            />
+            </div>
               </div>
               <h2
                 className="gradiant-bg prompt-light"

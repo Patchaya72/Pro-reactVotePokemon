@@ -51,6 +51,7 @@ function EditImage_Page() {
               textAlign: "center",
             }}
           >
+            
             <img
               src="https://i.pinimg.com/originals/6b/50/52/6b505222d87d67996a4759aae567e7a8.gif"
               style={{

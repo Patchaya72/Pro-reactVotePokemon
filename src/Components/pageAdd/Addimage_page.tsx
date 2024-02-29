@@ -1,13 +1,12 @@
 import { Card, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function EditImageing_Page() {
+function AddImage_Page() {
   const navigate = useNavigate();
 
   function navigateTo() {
-    navigate("/editimage");
+    navigate("/info");
   }
-
   function selectFile(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -44,8 +43,8 @@ function EditImageing_Page() {
             Back
           </button>
         </div>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <div style={{ display: "flex" }}>
           <Card
             sx={{
@@ -61,20 +60,20 @@ function EditImageing_Page() {
             }}
           >
             <div>
-            <img width="300px" id="preview" />
-            <TextField
-              type="file"
-              margin="normal"
-              id="file"
-              required
-              fullWidth
-              autoFocus
-              onChange={selectFile}
-            />
+              <img width="300px" id="preview" />
+              <TextField
+                type="file"
+                margin="normal"
+                id="file"
+                required
+                fullWidth
+                autoFocus
+                onChange={selectFile}
+              />
             </div>
             <div className="container">
               <TextField
-                label="Eevee"
+                label="ชื่อรูปภาพ"
                 type="Eevee"
                 required
                 fullWidth
@@ -85,12 +84,12 @@ function EditImageing_Page() {
               {" "}
               <br />
               <a className="button" href="#popup1">
-                Edit
+                ADD
               </a>
             </div>
             <div id="popup1" className="overlay">
               <div className="popup">
-                <h2>คุณทำการแก้ไขสำเร็จแล้ว</h2>
+                <h2>คุณทำการเพิ่มเรียบร้อยแล้ว</h2>
                 <a className="close" href="#">
                   &times;
                 </a>
@@ -116,4 +115,4 @@ function EditImageing_Page() {
   );
 }
 
-export default EditImageing_Page;
+export default AddImage_Page;

@@ -37,7 +37,6 @@ function Vote_page() {
             </div>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <div style={{ display: "flex" }}>
-       
           <Card
             sx={{
               backgroundColor: "rgba(255, 255, 255, 0.50)",

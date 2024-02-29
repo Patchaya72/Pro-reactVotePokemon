@@ -23,8 +23,10 @@ function Register_page() {
         <Card
           sx={{
             backgroundColor: "rgba(255, 255, 255, 0.9)",
-            padding: "40px",
-            borderRadius: "30px",
+            padding: "20px",
+            borderRadius: "20px", 
+            maxWidth: "600px", 
+            margin: "0 auto", 
           }}
         >
           <form>
@@ -32,7 +34,7 @@ function Register_page() {
               <img
                 src="https://static-00.iconduck.com/assets.00/pokemon-icon-2048x738-o3doht5o.png"
                 style={{
-                  width: "200px", 
+                  width: "200px",
                   display: "block",
                   margin: "0 auto",
                 }}
@@ -68,6 +70,11 @@ function Register_page() {
               >
                 Register
               </Button>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <h5>
+                  หากคุณมีบัญชีอยู่แล้ว <a href="/login">เข้าสู่ระบบ</a>
+                </h5>
+              </div>
             </div>
           </form>
         </Card>

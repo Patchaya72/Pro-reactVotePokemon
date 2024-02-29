@@ -5,6 +5,7 @@ function Infomation_Page() {
   const navigate = useNavigate();
   const navigates = useNavigate();
   const navigatess = useNavigate();
+  const navigatesss = useNavigate();
 
   function navigateToEditProfile() {
     navigate("/editprofile");
@@ -15,6 +16,9 @@ function Infomation_Page() {
   }
   function navigateToBackVote() {
     navigatess("/vote");
+  }
+  function navigateToAddimage() {
+    navigatesss("/addimage");
   }
 
   return (
@@ -35,7 +39,6 @@ function Infomation_Page() {
       }}
     >
       <div style={{ display: "flex", marginRight: "150px" }}>
-        
         <div style={{ marginTop: "0px" }}>
           <button className="button" onClick={navigateToBackVote}>
             Back
@@ -115,7 +118,7 @@ function Infomation_Page() {
       <br />
       <div style={{ display: "flex" }}>
         <div style={{ display: "flex" }}>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <Card
             sx={{
               backgroundColor: "rgba(255, 255, 255, 0.50)",
@@ -137,7 +140,6 @@ function Infomation_Page() {
                   display: "inline-block",
                 }}
               >
-                
                 <img
                   onClick={navigateToEditImage}
                   src="https://i.pinimg.com/originals/62/59/42/625942fdc8068bd3d0fea31a30127bae.gif"
@@ -162,14 +164,6 @@ function Infomation_Page() {
                     height: "170px", // Maintain aspect ratio
                   }}
                 />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <img
-                  src="https://i.pinimg.com/originals/6b/50/52/6b505222d87d67996a4759aae567e7a8.gif"
-                  style={{
-                    width: "190px",
-                    height: "170px", // Maintain aspect ratio
-                  }}
-                />
               </div>
               <div
                 style={{
@@ -185,6 +179,16 @@ function Infomation_Page() {
                   justifyContent: "center",
                 }}
               ></div>
+            </div>
+            <div onClick={navigateToAddimage}>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <img
+                src="https://www.shutterstock.com/image-vector/premium-picture-icon-logo-line-600nw-749844106.jpg"
+                style={{
+                  width: "190px",
+                  height: "170px", // Maintain aspect ratio
+                }}
+              />
             </div>
           </Card>
         </div>

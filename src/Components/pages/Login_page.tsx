@@ -69,6 +69,13 @@ function Login_page() {
               </Button>
             </div>
           </form>
+          <br />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <h5>
+              หากคุณยังไม่มีบัญชี{" "}
+              <a href="/regis">สมัครสมาชิกเลย</a>
+            </h5>
+          </div>
         </Card>
       </div>
       <div

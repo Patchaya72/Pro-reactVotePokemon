@@ -13,6 +13,9 @@ import Rangseven_page from './Components/pageRang/Rangseven_page';
 import Rangthree_page from './Components/pageRang/Rangthree_page';
 import EditImage_Page from './Components/pageEdit/EditImage_page';
 import EditImageing_Page from './Components/pageEdit/Editimageing_page';
+import AddImage_Page from './Components/pageAdd/Addimage_page';
+import Admin_page from './Components/Admin/Admin_page';
+import Graph_Page from './Components/pageRang/Graph_page';
 
 const routers = createBrowserRouter([
   {
@@ -73,6 +76,18 @@ const routers = createBrowserRouter([
     {
       path: "/rangthree",
       element: <Rangthree_page />
+    },
+    {
+      path: "/addimage",
+      element: <AddImage_Page/>
+    },
+    {
+      path: "/admin",
+      element: <Admin_page/>
+    },
+    {
+      path: "/graph",
+      element: <Graph_Page/>
     },
   ],
 }
