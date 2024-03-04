@@ -24,34 +24,38 @@ function Graph_Page() {
         padding: "auto",
       }}
     >
-       <div style={{ display: "flex", marginRight: "150px" }}>
+      <div style={{ display: "flex", marginRight: "150px" }}>
         &nbsp; &nbsp;
         <div style={{ marginTop: "0px" }}>
           <button className="button containerbt" onClick={navigateTo}>
             Back
           </button>
         </div>
-        <div style={{ display: "flex" }}>
-          
-        </div>
-        <Card
-          sx={{
-            backgroundColor: "rgba(255, 255, 255, 1.0)",
-            padding: "20px",
-            borderRadius: "30px",
-            marginLeft: "600px", // เพิ่มระยะห่างด้านขวาของการ์ด
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            width: "700px",
-            height: "460px",
-          }}
-        >
-          <div className="prompt-light">
+        <div style={{ display: "flex" }}></div>
+      </div>
+      <Card
+        sx={{
+          backgroundColor: "rgba(255, 255, 255, 1.0)",
+          padding: "20px",
+          borderRadius: "30px",
+          marginLeft: "600px", // เพิ่มระยะห่างด้านขวาของการ์ด
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          width: "700px",
+          height: "460px",
+        }}
+      >
+        <div className="prompt-light">
           <LineChart
-            xAxis={[{ data: [1, 2, 3, 5, 8, 10, 12],  label: "ผลการจัดอันดับ 3 วัน และ 7 วัน" }]} //กำหนดค่าแกน
+            xAxis={[
+              {
+                data: [1, 2, 3, 5, 8, 10, 12],
+                label: "ผลการจัดอันดับ 3 วัน และ 7 วัน",
+              },
+            ]} //กำหนดค่าแกน
             series={[
               {
                 data: [2, 5.5, 2, 8.5, 1.5, 5, 9],
@@ -61,8 +65,7 @@ function Graph_Page() {
             height={380}
           />
         </div>
-        </Card>
-    </div>
+      </Card>
     </div>
   );
 }

@@ -36,7 +36,7 @@ function Vote2_page() {
         <div style={{ display: "flex" }}>
           <Card
             sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.50)",
+              backgroundColor: "rgba(255, 255, 255, 1.0)",
               padding: "40px",
               borderRadius: "30px",
               marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
@@ -72,7 +72,7 @@ function Vote2_page() {
 
           <Card
             sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.50)",
+              backgroundColor: "rgba(255, 255, 255, 1.0)",
               padding: "40px",
               borderRadius: "30px",
               marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
