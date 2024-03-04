@@ -43,15 +43,13 @@ function AddImage_Page() {
             Back
           </button>
         </div>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <div style={{ display: "flex" }}>
           <Card
             sx={{
               backgroundColor: "rgba(255, 255, 255, 0.50)",
               padding: "40px",
               borderRadius: "30px",
-              marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
+              marginLeft: "150px", // เพิ่มระยะห่างด้านขวาของการ์ด
               display: "flex",
               flexDirection: "column",
               alignItems: "center",

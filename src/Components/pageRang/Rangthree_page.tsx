@@ -18,7 +18,7 @@ function Rangthree_page() {
         justifyContent: "center",
         alignItems: "center",
         backgroundImage:
-          "url('https://i.pinimg.com/originals/dc/a6/16/dca616db3450b5a64c0d1b655a7d0be5.gif')",
+          "url('https://i.pinimg.com/originals/a7/a5/e3/a7a5e3589be5662d93d4539284062c22.gif')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         color: "white",
@@ -34,15 +34,13 @@ function Rangthree_page() {
             Back
           </button>
         </div>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        &nbsp;
         <div style={{ display: "flex" }}></div>
         <Card
           sx={{
             backgroundColor: "rgba(255, 255, 255, 1.0)",
             padding: "20px",
             borderRadius: "30px",
-            marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
+            marginLeft: "120px", // เพิ่มระยะห่างด้านขวาของการ์ด
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

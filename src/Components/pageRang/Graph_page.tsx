@@ -1,12 +1,11 @@
 import { Card } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { LineChart } from "@mui/x-charts/LineChart";
 
 function Graph_Page() {
   const navigates = useNavigate();
-
-
-  function navigateToBackVote() {
-    navigates("/vote");
+  function navigateTo() {
+    navigates("/rangtoday");
   }
   return (
     <div
@@ -25,76 +24,45 @@ function Graph_Page() {
         padding: "auto",
       }}
     >
-      <div style={{ display: "flex", marginRight: "150px" }}>
+       <div style={{ display: "flex", marginRight: "150px" }}>
+        &nbsp; &nbsp;
         <div style={{ marginTop: "0px" }}>
-          <button className="button" onClick={navigateToBackVote}>
+          <button className="button containerbt" onClick={navigateTo}>
             Back
           </button>
         </div>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        &nbsp;
         <div style={{ display: "flex" }}>
-          <Card
-            sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.50)",
-              padding: "20px",
-              borderRadius: "30px",
-              marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div
-                style={{
-                  marginRight: "20px",
-                  borderRadius: "50%",
-                  display: "inline-block",
-                }}
-              >
-                <img
-                  src="https://i.pinimg.com/564x/ed/84/3b/ed843b02bf7de031107f058040386173.jpg"
-                  style={{
-                    width: "170px",
-                    height: "170px", // Maintain aspect ratio
-                    borderRadius: "50%", // Make it circular
-                  }}
-                />
-              </div>
-              <div
-                style={{
-                  textAlign: "left",
-                  display: "inline-block",
-                  verticalAlign: "top",
-                }}
-              >
-                <div className="prompt-light">
-                  <h1>Eevee Konami</h1>
-                  <p>
-                    Followers 120.10K &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Following 57K &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </p>
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
-              </div>
-            </div>
-          </Card>
+          
         </div>
-      </div>
-      <br />
-      <div style={{ display: "flex" }}>
-        <div style={{ display: "flex" }}>
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <Card
+          sx={{
+            backgroundColor: "rgba(255, 255, 255, 1.0)",
+            padding: "20px",
+            borderRadius: "30px",
+            marginLeft: "600px", // เพิ่มระยะห่างด้านขวาของการ์ด
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            width: "700px",
+            height: "460px",
+          }}
+        >
+          <div className="prompt-light">
+          <LineChart
+            xAxis={[{ data: [1, 2, 3, 5, 8, 10, 12],  label: "ผลการจัดอันดับ 3 วัน และ 7 วัน" }]} //กำหนดค่าแกน
+            series={[
+              {
+                data: [2, 5.5, 2, 8.5, 1.5, 5, 9],
+              },
+            ]}
+            width={600}
+            height={380}
+          />
         </div>
-      </div>
+        </Card>
+    </div>
     </div>
   );
 }

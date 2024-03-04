@@ -44,14 +44,13 @@ function Editprofile_Page() {
             Back
           </button>
         </div>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        &nbsp;
         <div style={{ display: "flex" }}></div>
         <Card
           sx={{
             backgroundColor: "rgba(255, 255, 255, 0.9)",
-            padding: "10px", // ลด padding เพื่อทำให้การ์ดเล็กลง
+            padding: "0px", // ลด padding เพื่อทำให้การ์ดเล็กลง
             borderRadius: "20px", // ลดขนาดของ borderRadius เพื่อทำให้การ์ดเล็กลง
+            marginLeft:"140px",
           }}
         >
           <form style={{ width: "100%" }}>
