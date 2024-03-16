@@ -1,7 +1,12 @@
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { UsersGetRespose } from "../../model/UsersGetRespose";
 
 function Choose_page() {
+  const user:UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
+
+  console.log(user);
+  
   return (
     <>
       <div
@@ -15,7 +20,7 @@ function Choose_page() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           color: "white",
-          height: "89.5vh",
+          height: "94vh",
           width: "100vw",
           padding: "auto",
         }}

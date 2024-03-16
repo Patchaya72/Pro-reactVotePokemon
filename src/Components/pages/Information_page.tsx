@@ -1,7 +1,13 @@
 import { Card } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { UsersGetRespose } from "../../model/UsersGetRespose";
 
 function Infomation_Page() {
+
+  const user:UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
+  console.log(user.id);
+  
+
   const navigate = useNavigate();
   const navigates = useNavigate();
   const navigatess = useNavigate();
@@ -33,7 +39,7 @@ function Infomation_Page() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         color: "white",
-        height: "90vh",
+        height: "94vh",
         width: "100vw",
         padding: "auto",
       }}
@@ -66,7 +72,7 @@ function Infomation_Page() {
                 }}
               >
                 <img
-                  src="https://i.pinimg.com/564x/ed/84/3b/ed843b02bf7de031107f058040386173.jpg"
+                  src={user.img}
                   style={{
                     width: "170px",
                     height: "170px", // Maintain aspect ratio
@@ -82,7 +88,7 @@ function Infomation_Page() {
                 }}
               >
                 <div className="prompt-light">
-                  <h1>Eevee Konami</h1>
+                  <h1>{user.name}</h1>
                   <p>
                     Followers 120.10K &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Following 57K &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

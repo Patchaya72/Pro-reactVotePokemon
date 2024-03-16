@@ -28,7 +28,7 @@ function Rang_page() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         color: "white",
-        height: "89.5vh",
+        height: "94vh",
         width: "100vw",
         padding: "auto",
       }}

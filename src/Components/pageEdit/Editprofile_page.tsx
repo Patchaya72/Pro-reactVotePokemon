@@ -1,8 +1,23 @@
 import { Card, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Service } from "../../servics/servic";
+import { UsersGetRespose } from "../../model/UsersGetRespose";
+import { useState } from "react";
 
 function Editprofile_Page() {
+  //ค่าตัวแปร
+  let name = "";
+  let password = "";
+  let confirmPassword = "";
+
+  const [upPic, setUpPic] = useState();
+
+  const user: UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
+  console.log(user.id);
+
   const navigate = useNavigate();
+  const services = new Service();
+  const formData = new FormData();
 
   function navigateTo() {
     navigate("/info");
@@ -10,16 +25,31 @@ function Editprofile_Page() {
 
   function selectFile(event) {
     const file = event.target.files[0];
+
+    formData.append("file", file);
+
+
     const reader = new FileReader();
 
     reader.onload = function () {
       const preview = document.getElementById("preview");
       preview.src = reader.result;
+      
     };
-
+    
     reader.readAsDataURL(file);
   }
-  
+
+  async function upload(){
+    uploadImageOnFireBase(formData, user.id, name, password);
+    
+    const res = await services.getUserById(user.id);
+    localStorage.clear();
+    localStorage.setItem("objUser",JSON.stringify(res))
+    console.log(user.img);
+    
+  }
+
   return (
     <div
       style={{
@@ -32,7 +62,7 @@ function Editprofile_Page() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         color: "white",
-        height: "91vh",
+        height: "94vh",
         width: "100vw",
         padding: "auto",
       }}
@@ -50,7 +80,7 @@ function Editprofile_Page() {
             backgroundColor: "rgba(255, 255, 255, 0.9)",
             padding: "0px", // ลด padding เพื่อทำให้การ์ดเล็กลง
             borderRadius: "20px", // ลดขนาดของ borderRadius เพื่อทำให้การ์ดเล็กลง
-            marginLeft:"140px",
+            marginLeft: "140px",
           }}
         >
           <form style={{ width: "100%" }}>
@@ -72,18 +102,18 @@ function Editprofile_Page() {
                   height: "150px", // รักษาอัตราส่วน
                 }}
               >
-            <div>
-            <img width="300px" id="preview" />
-            <TextField
-              type="file"
-              margin="normal"
-              id="file"
-              required
-              fullWidth
-              autoFocus
-              onChange={selectFile}
-            />
-            </div>
+                <div>
+                  <img width="300px" id="preview" />
+                  <TextField
+                    type="file"
+                    margin="normal"
+                    id="file"
+                    required
+                    fullWidth
+                    autoFocus
+                    onChange={selectFile}
+                  />
+                </div>
               </div>
               <h2
                 className="gradiant-bg prompt-light"
@@ -93,13 +123,24 @@ function Editprofile_Page() {
               </h2>
             </div>
             <div className="container prompt-light">
-              <TextField label="Name" type="email" required fullWidth />
+              <TextField
+                label="Name"
+                type="email"
+                required
+                fullWidth
+                onChange={(e) => {
+                  name = e.target.value;
+                }}
+              />
               <TextField
                 label="Password"
                 type="password"
                 required
                 fullWidth
                 margin="normal"
+                onChange={(e) => {
+                  password = e.target.value;
+                }}
               />
               <TextField
                 label="Confirm Password"
@@ -108,7 +149,17 @@ function Editprofile_Page() {
                 fullWidth
                 margin="normal"
               />
-              <div className="box">
+              <div
+                className="box"
+                onClick={() => {
+                  if (password == confirmPassword) {
+                    upload();
+                    alert("Register Success!!");
+                  } else {
+                    alert("Password ไม่ตรงกัน กรุณาใส่ให้ตรงกัน");
+                  }
+                }}
+              >
                 <a className="button" href="#popup1">
                   Edit
                 </a>
@@ -147,6 +198,43 @@ function Editprofile_Page() {
       ></div>
     </div>
   );
+
+  async function editUser(
+    name: string,
+    password: string,
+    profile: string,
+    id: number
+  ) {
+    const body = {
+      name: name,
+      password: password,
+      profile: profile,
+    };
+
+    console.log("Body");
+
+    console.log(body.name);
+    console.log(body.password);
+    console.log(body.profile);
+
+    console.log("Body :" + body);
+    await services.putUserEdit(body, id);
+  }
+
+  async function uploadImageOnFireBase(
+    data: FormData,
+    id: number,
+    name: string,
+    password: string
+  ) {
+    console.log("ImageOnfireBase: " + data);
+
+    const res = await services.postPictureOnFireBase(data);
+    const img = String(res).split(" "); //แบ่งตรงเคื่องหมายวรรคตอน
+    console.log("Upload Image On Fire Base: " + img[1]);
+
+    await editUser(name, password, String(img[1]), id);
+  }
 }
 
 export default Editprofile_Page;

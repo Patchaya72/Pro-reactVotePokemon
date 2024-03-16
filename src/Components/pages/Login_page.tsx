@@ -1,9 +1,53 @@
-import { Button, Card, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Button, Card, CircularProgress, TextField } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate} from "react-router-dom";
+import { UsersGetRespose } from "../../model/UsersGetRespose";
+import { Service } from "../../servics/servic";
 
 function Login_page() {
-  return (
-    <div
+  const [users, setUsers] = useState<UsersGetRespose[]>([]);
+  const navigate = useNavigate();
+
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState(false);
+  const services = new Service();
+
+  let email = "";
+  let password = "";
+
+  useEffect(() => {
+    autoLoad();
+  }, []);
+
+  const autoLoad = async () => {
+    setLoading(true);
+    try {
+      const res = await services.getAllUser();
+      setUsers(res);
+      console.log(res);
+    } catch (error) {
+      console.error("Failed to load movie:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  function navigateTo() {
+
+     navigate("/choose");
+  }
+
+  
+
+  return (<>
+    {loading ? (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <CircularProgress />
+      </div>
+    ) : (
+      <div
+
       style={{
         display: "flex",
         flexDirection: "column",
@@ -14,7 +58,7 @@ function Login_page() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         color: "white",
-        height: "89.5vh",
+        height: "94.5vh",
         width: "100vw",
         padding: "auto",
       }}
@@ -48,6 +92,12 @@ function Login_page() {
                 required
                 fullWidth
                 margin="normal"
+                ref={emailRef}
+                onChange={(e) => {
+                  email = e.target.value;
+                  console.log("Value: " + e.target.value);
+                  console.log("Input E: " + password);
+                }}
               />
               <TextField
                 label="Password"
@@ -55,15 +105,43 @@ function Login_page() {
                 required
                 fullWidth
                 margin="normal"
+                ref={passwordRef}
+                onChange={(e) => {
+                  password = e.target.value;
+                  console.log("Value: " + e.target.value);
+                  console.log("Input P: " + password);
+                }}
               />
               <Button
-                component={Link}
-                to="/choose"
                 type="submit"
                 variant="contained"
                 color="primary"
                 fullWidth
                 style={{ marginTop: "20px" }}
+                onClick={() => {
+                  getAll();
+                  console.log(email);
+                  console.log(password);
+                  // btnClick(email,password);
+                  users.map((e) => {
+                    // console.log("In Map "+email);
+                    try {
+                      if (String(e.email) === String(email)) {
+                        console.log("Email Chk");
+
+                        if (String(e.password) === String(password)) {
+                          console.log("Password Chk");
+                          localStorage.clear();
+                          localStorage.setItem("objUser",JSON.stringify(e))
+                          navigateTo();
+                          alert("Login Success!! Welcome to FaceMash");
+                        }
+                      }
+                    } catch (error) {
+                      console.log("Access Denied!!: ", error);
+                    }
+                  });
+                }}
               >
                 login
               </Button>
@@ -72,8 +150,7 @@ function Login_page() {
           <br />
           <div style={{ display: "flex", justifyContent: "center" }}>
             <h5>
-              หากคุณยังไม่มีบัญชี{" "}
-              <a href="/regis">สมัครสมาชิกเลย</a>
+              หากคุณยังไม่มีบัญชี <a href="/regis">สมัครสมาชิกเลย</a>
             </h5>
           </div>
         </Card>
@@ -87,7 +164,19 @@ function Login_page() {
         }}
       ></div>
     </div>
-  );
+    
+    )}
+    
+  </>);
+  async function getAll() {
+    console.log("get All Function");
+    const res = await services.getAllUser();
+    setUsers(res);
+    console.log(res);
+  }
+  
 }
+
+
 
 export default Login_page;

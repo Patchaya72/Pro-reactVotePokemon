@@ -14,7 +14,7 @@ function Admin_page() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         color: "white",
-        height: "90vh",
+        height: "94vh",
         width: "100vw",
         padding: "auto",
       }}
