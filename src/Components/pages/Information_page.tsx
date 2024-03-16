@@ -45,7 +45,7 @@ function Infomation_Page() {
       }}
     >
       <div style={{ display: "flex", marginRight: "150px" }}>
-        <div style={{ marginTop: "0px" }}>
+        <div style={{ marginTop: "0px", color:"black" }}>
           <button className="button" onClick={navigateToBackVote}>
             Back
           </button>
@@ -55,7 +55,7 @@ function Infomation_Page() {
         <div style={{ display: "flex" }}>
           <Card
             sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.50)",
+              backgroundColor: "rgba(255, 255, 255, 1.50)",
               padding: "20px",
               borderRadius: "30px",
               marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
@@ -127,7 +127,7 @@ function Infomation_Page() {
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <Card
             sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.50)",
+              backgroundColor: "rgba(255, 255, 255, 1.50)",
               padding: "20px",
               borderRadius: "30px",
               marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
