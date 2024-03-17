@@ -2,7 +2,7 @@ import axios from "axios";
 import { UsersGetRespose } from "../model/UsersGetRespose";
 
 // eslint-disable-next-line react-refresh/only-export-components
-const HOST: string = "http://localhost:3000/";
+const HOST: string = "http://localhost:3000/"; 
 
 export class Service {
   async getAllUser() {
