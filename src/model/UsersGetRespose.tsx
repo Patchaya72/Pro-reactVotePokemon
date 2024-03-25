@@ -3,6 +3,6 @@ export interface UsersGetRespose{
     name: string;
     email:string;
     password:string;
-    img:string;
+    profile:string;
     role:number;
 }

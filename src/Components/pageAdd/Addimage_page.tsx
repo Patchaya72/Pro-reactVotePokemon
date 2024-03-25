@@ -1,22 +1,41 @@
 import { Card, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { UsersGetRespose } from "../../model/UsersGetRespose";
+import { Service } from "../../servics/servic";
 
 function AddImage_Page() {
+const services = new Service();
+const formData = new FormData();
+ let user: UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
+ console.log(user.id);
   const navigate = useNavigate();
+
+  let name = "";
+
 
   function navigateTo() {
     navigate("/info");
   }
   function selectFile(event) {
     const file = event.target.files[0];
+    
+
+    formData.append("file", file);
+
+
     const reader = new FileReader();
 
     reader.onload = function () {
       const preview = document.getElementById("preview");
       preview.src = reader.result;
+      
     };
-
+    
     reader.readAsDataURL(file);
+  }
+
+  async function upload(){
+    uploadImageOnFireBase(formData, name,user.id);
   }
 
   return (
@@ -76,34 +95,26 @@ function AddImage_Page() {
                 required
                 fullWidth
                 margin="normal"
-              />
+              onChange={(e) => {
+                  name = e.target.value;
+                }}/>
             </div>
             <div>
               {" "}
               <br />
-              <a className="button" href="#popup1">
+              <a className="button" href="#popup1" onClick={async () => {
+                if(name !=""){ 
+                  await upload();
+                  alert("สำเร็จแล้ว");
+                  navigateTo();
+                }
+                else(
+                  alert("ใส่ชื่อรูปด้วยครัช")
+                )
+               
+                 }}>
                 ADD
               </a>
-            </div>
-            <div id="popup1" className="overlay">
-              <div className="popup">
-                <h2>คุณทำการเพิ่มเรียบร้อยแล้ว</h2>
-                <a className="close" href="#">
-                  &times;
-                </a>
-                <div className="content">
-                  &nbsp;&nbsp;
-                  <img
-                    src="https://thumb.ac-illust.com/25/252183b6cb8338c3f596ba058de7b6be_t.jpeg"
-                    style={{
-                      width: "50%", // ปรับขนาดรูปภาพให้ทั้งหมดแสดงผลในตัว div
-                      height: "50%", // ปรับขนาดรูปภาพให้ทั้งหมดแสดงผลในตัว div
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  />
-                </div>
-              </div>
             </div>
             <div className="prompt-light" style={{ marginTop: "20px" }}></div>
           </Card>
@@ -111,6 +122,39 @@ function AddImage_Page() {
       </div>
     </div>
   );
+  async function editUser(
+    name: string ,
+    path: string,
+    id: number
+  ) {
+
+    const body = {
+
+      
+      name: name ,
+      Uid: id , 
+      path: path , 
+
+    };
+
+    await services.postImg(body);
+
+  }
+
+  async function uploadImageOnFireBase(
+    data: FormData,
+    name: string,
+    id:number
+  ) {
+    console.log("ImageOnfireBase: " + data);
+    
+    const res = await services.postPictureOnFireBase(data);
+    const img = String(res).split(" "); //แบ่งตรงเคื่องหมายวรรคตอน
+    console.log("Upload Image On Fire Base: " + img[1]);
+
+    await editUser(name, String(img[1]), id);
+
+  }
 }
 
 export default AddImage_Page;

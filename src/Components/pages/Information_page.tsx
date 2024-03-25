@@ -1,12 +1,28 @@
-import { Card } from "@mui/material";
+import { Card, CardMedia, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { UsersGetRespose } from "../../model/UsersGetRespose";
+import { PicturePostRequest } from "../../model/picturePostRequest";
+import { useEffect, useState } from "react";
+import { Service } from "../../servics/servic";
 
 function Infomation_Page() {
-
-  const user:UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
+  const user: UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
+  const [images, setImage] = useState<PicturePostRequest[]>([]);
   console.log(user.id);
-  
+  console.log(user.email);
+  const services = new Service();
+
+  useEffect(() => {
+    const loadDataAsync = async () => {
+      const res = await services.getImgById(user.id);
+      const Imgs: PicturePostRequest[] = res;
+      setImage(Imgs);
+      console.log(Imgs);
+      
+    };
+    loadDataAsync();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const navigate = useNavigate();
   const navigates = useNavigate();
@@ -45,7 +61,7 @@ function Infomation_Page() {
       }}
     >
       <div style={{ display: "flex", marginRight: "150px" }}>
-        <div style={{ marginTop: "0px", color:"black" }}>
+        <div style={{ marginTop: "0px", color: "black" }}>
           <button className="button" onClick={navigateToBackVote}>
             Back
           </button>
@@ -72,7 +88,7 @@ function Infomation_Page() {
                 }}
               >
                 <img
-                  src={user.img}
+                  src={user.profile}
                   style={{
                     width: "170px",
                     height: "170px", // Maintain aspect ratio
@@ -122,6 +138,7 @@ function Infomation_Page() {
         </div>
       </div>
       <br />
+
       <div style={{ display: "flex" }}>
         <div style={{ display: "flex" }}>
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -135,7 +152,56 @@ function Infomation_Page() {
               alignItems: "center",
             }}
           >
-            <div
+            <Grid container spacing={2}>
+              {images?.map((image, index) => (
+                <Grid item xs={2.4} key={index}>
+                  <CardMedia
+                    sx={{
+                      height: 160,
+                      width: 160,
+                      borderRadius: 5,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      border: "2px solid white",
+                    }}
+                    onClick={() => {
+                      navigateToEditImage   
+                    }}
+                    image={image.path}
+                  />
+                </Grid>
+              ))}
+
+              {/* <Grid item xs={1.8}>
+  <div style={{ backgroundColor: "white", borderRadius: 15 }}>
+    <Box
+      sx={{
+        height: 160,
+        width: 160,
+        borderRadius: 5,
+        borderColor: "white",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <AddPhotoAlternateOutlinedIcon
+        sx={{
+          height: 100,
+          width: 100,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginLeft: "10px",
+        }}
+      />
+    </Box>
+  </div>
+</Grid> */}
+            </Grid>
+
+            {/* <div
               style={{ display: "flex", alignItems: "center" }}
               onClick={navigateToEditImage}
             >
@@ -185,7 +251,7 @@ function Infomation_Page() {
                   justifyContent: "center",
                 }}
               ></div>
-            </div>
+            </div> */}
             <div onClick={navigateToAddimage}>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <img

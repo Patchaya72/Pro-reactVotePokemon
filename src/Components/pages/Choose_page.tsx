@@ -1,12 +1,11 @@
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { UsersGetRespose } from "../../model/UsersGetRespose";
+
 
 function Choose_page() {
-  const user:UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
 
-  console.log(user);
-  
+
+
   return (
     <>
       <div
@@ -25,7 +24,10 @@ function Choose_page() {
           padding: "auto",
         }}
       >
-        <Button className="prompt-light" component={Link} to="/vote"
+        <Button
+          className="prompt-light"
+          component={Link}
+          to="/vote"
           style={{
             backgroundColor: "#FFFF00",
             color: "white",

@@ -9,10 +9,10 @@ function Editprofile_Page() {
   let name = "";
   let password = "";
   let confirmPassword = "";
+  let filechk=""
 
-  const [upPic, setUpPic] = useState();
 
-  const user: UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
+ let user: UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
   console.log(user.id);
 
   const navigate = useNavigate();
@@ -25,6 +25,9 @@ function Editprofile_Page() {
 
   function selectFile(event) {
     const file = event.target.files[0];
+    filechk=file
+    console.log(filechk);
+    
 
     formData.append("file", file);
 
@@ -41,12 +44,12 @@ function Editprofile_Page() {
   }
 
   async function upload(){
+
+
+
+
     uploadImageOnFireBase(formData, user.id, name, password);
     
-    const res = await services.getUserById(user.id);
-    localStorage.clear();
-    localStorage.setItem("objUser",JSON.stringify(res))
-    console.log(user.img);
     
   }
 
@@ -152,12 +155,32 @@ function Editprofile_Page() {
               <div
                 className="box"
                 onClick={() => {
-                  if (password == confirmPassword) {
+                  if (password == confirmPassword&&password != "") {
                     upload();
                     alert("Register Success!!");
                   } else {
                     alert("Password ไม่ตรงกัน กรุณาใส่ให้ตรงกัน");
                   }
+
+                  // if(name==""&&password==""&&filechk==""){
+                  //   alert("คุณพี่ยังไม่ใส่อะไรเลยค่ะ!!!");
+                  // }
+                  // else if(name!=""&&password==""&&filechk==""){
+                  //   //อัพname
+                  //    editUser(name ,undefined,undefined,user.id);
+                  // }
+                  // else if (name!=""&&password!=""&&filechk==""){
+                  //    //อัพname and password
+                  //   editUser(name ,password,undefined,user.id);
+                  // }
+                  // else if (name!=""&&password!=""&&filechk!=""){
+                  //     //อัพทั้งหมด
+                  //   upload();
+                  // }
+                  // else if (name==""&&password==""&&filechk==""){
+                  //    //อัพทั้งหมด
+                  //   upload();
+                  // }
                 }}
               >
                 <a className="button" href="#popup1">
@@ -200,15 +223,18 @@ function Editprofile_Page() {
   );
 
   async function editUser(
-    name: string,
-    password: string,
-    profile: string,
+    name: string | undefined,
+    password: string | undefined,
+    profile: string | undefined,
     id: number
   ) {
+
     const body = {
-      name: name,
-      password: password,
-      profile: profile,
+
+      
+      name: name || undefined,
+      password: password || undefined, 
+      profile: profile || undefined,
     };
 
     console.log("Body");
@@ -219,6 +245,24 @@ function Editprofile_Page() {
 
     console.log("Body :" + body);
     await services.putUserEdit(body, id);
+
+    const res:UsersGetRespose[] = await services.getUserById(id);
+
+    const userUpdate = {
+      id:res[0].id,
+      name: res[0].name,
+      email:res[0].email,
+      password:res[0].password,
+      profile:res[0].profile,
+      role:res[0].role,
+    };
+    localStorage.setItem("objUser",JSON.stringify(userUpdate))
+    let one: UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
+    console.log(one);
+    console.log("res="+res[0].email);
+    
+    
+
   }
 
   async function uploadImageOnFireBase(
@@ -228,12 +272,19 @@ function Editprofile_Page() {
     password: string
   ) {
     console.log("ImageOnfireBase: " + data);
-
+    
+    if (name==""){
+      name :undefined
+    }
+    if (password==""){
+      name :undefined
+    }
     const res = await services.postPictureOnFireBase(data);
     const img = String(res).split(" "); //แบ่งตรงเคื่องหมายวรรคตอน
     console.log("Upload Image On Fire Base: " + img[1]);
 
     await editUser(name, password, String(img[1]), id);
+
   }
 }
 
