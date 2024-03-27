@@ -8,7 +8,7 @@ import {  IoCaretUpCircleSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { Service } from "../../servics/servic";
 
-function Rang_page() {
+function Rangnotlogin_page() {
   let date: string[] = [];
   const [Data, setdate] = useState<string[]>([]);
   const [Rank, setRank] = useState<RangGetRespose[]>();
@@ -78,13 +78,13 @@ function Rang_page() {
   // const navigates = useNavigate();
 
   function navigateTo() {
-    navigate("/vote");
+    navigate("/");
   }
   // function navigateTograph() {
   //   navigates("/graph");
   // }
-  function navigateToprograph(ImgID:number){
-    navigate(`/profilerank?ImgID=${ImgID}`)
+  function navigateToprograph(){
+    navigate("/profilerank")
   }
 
   return (
@@ -131,8 +131,7 @@ function Rang_page() {
             <Button
               className="prompt-light"
               color="inherit"
-              component={Link}
-              to="/rangtoday"
+
             >
               <div>
                 <BsChatHeartFill
@@ -140,37 +139,33 @@ function Rang_page() {
                 />
               </div>
             </Button>
-            <Button
+            {/* <Button
               className="prompt-light"
               color="inherit"
-              component={Link}
-              to="/rangseven"
+
             >
               <div>
                 <BsChatHeartFill style={{ color: "blue", fontSize: "24px" }} />
               </div>
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
               className="prompt-light"
               color="inherit"
-              component={Link}
-              to="/rangthree"
+
             >
               <div>
                 <BsChatHeartFill style={{ color: "red", fontSize: "24px" }} />
               </div>
-            </Button>
+            </Button> */}
 
-            <Button
+            {/* <Button
               className="prompt-light"
               color="inherit"
-              component={Link}
-              to="/vote"
             >
               <div>
                 <BiHome style={{ color: "green", fontSize: "24px" }} />
               </div>
-            </Button>
+            </Button> */}
           </div>
           <div>
             <h3 className="prompt-light">Today's ranking</h3>
@@ -197,11 +192,6 @@ function Rang_page() {
                   return (
                     <div style={{ display: "flex", marginTop: "50px" }} key={i}>
                       <Card
-                        onClick={()=>{
-                          navigateToprograph(
-                            e.id
-                          )
-                        }}
                         sx={{
                           backgroundColor: "white",
                           padding: "30px",
@@ -279,4 +269,4 @@ function Rang_page() {
   );
 }
 
-export default Rang_page;
+export default Rangnotlogin_page;

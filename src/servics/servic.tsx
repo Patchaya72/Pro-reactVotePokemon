@@ -2,9 +2,12 @@ import axios from "axios";
 import { UsersGetRespose } from "../model/UsersGetRespose";
 import { PicturePostRequest } from "../model/picturePostRequest";
 import { VoteGetRequest } from "../model/votePostRequest";
+import { RangGetRespose } from "../model/rangGetRespose";
+import { GraphGEtRespose } from "../model/graphGEtRespose";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const HOST: string = "http://localhost:3000/"; 
+// const HOST: string = "https://project-reactvotepokemon-b.onrender.com/";
 
 export class Service {
   async getAllUser() {
@@ -58,15 +61,55 @@ export class Service {
 
 
   async getPictureById(id: number) {
-    const url = HOST + `picture/${id}`;
+    const url = HOST + `img/img/${id}`;
     const response = await axios.get(url);
     const user: PicturePostRequest[] = response.data; 
     return user;
   }
 
+  async deletePictureById(id:number) {
+    const url = HOST + `img/${id}`;
+    const response = await axios.delete(url);
+    const res = response.data
+    console.log(res);
+    
+  }
+
+  async deleteVoteByPictureId(id:number) {
+    const url = HOST + `vote/edit/null/${id}`;
+    const response = await axios.put(url);
+    const res = response.data
+    console.log(res);
+    
+  }
+
+  async updatePictureById(body:{ name:string | undefined; score:number | undefined; path:string|undefined},id:number) {
+    const url = HOST + `img/edit/picture/${id}`;
+    const response = await axios.put(url,body);
+    const res = response.data
+    console.log(res);
+    
+  }
+
+  async deletePictureOnFirebase(path:string) {
+    const url = HOST + `img/paths?path=`+path;
+    console.log("URL: "+url);
+    const response = await axios.delete(url);
+    const res = response.data
+    console.log(res);
+    return (res)
+  }
+
   async putPictureById(id: number) {
     const url = HOST + `edit/${id}`;
     const response = await axios.put(url);
+    const user: PicturePostRequest[] = response.data;
+    return user;
+  }
+
+  async putScorePictureById(body: { score: number},id: number) {
+    const url = HOST + `img/edit/${id}`;
+    const response = await axios.put(url,body);
     const user: PicturePostRequest[] = response.data;
     return user;
   }
@@ -87,8 +130,8 @@ export class Service {
     return img;
   }
 
-  async postImg(body: { score: number;date: string ; ImgID: number ; }) {
-    const url = HOST + `vote/add`;
+  async postImg(body: { name: string;Uid: number ; path: string ; }) {
+    const url = HOST + `img/add`;
     const response = await axios.post(url,body);
     const res = response.data
     console.log(res);
@@ -104,7 +147,7 @@ export class Service {
   }
   
    async postVote(body: { score: number ; ImgID: number ; }) {
-    const url = HOST + `img/add`;
+    const url = HOST + `vote/add`;
     const response = await axios.post(url,body);
     const res = response.data
     console.log(res);
@@ -122,7 +165,7 @@ export class Service {
   async putVoteById(body: { score: number},id: number) {
     
     const url = HOST + `vote/edit/${id}`;
-    const response = await axios.put(url);
+    const response = await axios.put(url,body);
     const user: UsersGetRespose[] = response.data;
     return user;
   }
@@ -138,5 +181,28 @@ export class Service {
     console.log(res);
     return (res)
   }
-  
+
+  async getRangToday() {
+    
+    const url = HOST + `img/rankToday/get`;
+    const response = await axios.get(url);
+    const vote :  RangGetRespose[] = response.data;
+    console.log(vote);
+    return vote;
+  }
+
+  async getPictureRankingYesterday() {
+    const url = HOST + `img/rankYesterday/get`;
+    const response = await axios.get(url);
+    const vote :  RangGetRespose[] = response.data;
+    console.log(vote);
+    return vote;
+  }
+  async getGraph(id: number) {
+    const url = HOST + `img/Graph/${id}`;
+    const response = await axios.get(url);
+    const vote :  GraphGEtRespose[] = response.data;
+    console.log(vote);
+    return vote;
+  }
 }

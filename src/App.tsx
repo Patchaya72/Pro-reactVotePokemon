@@ -16,6 +16,11 @@ import EditImageing_Page from './Components/pageEdit/Editimageing_page';
 import AddImage_Page from './Components/pageAdd/Addimage_page';
 import Admin_page from './Components/Admin/Admin_page';
 import Graph_Page from './Components/pageRang/Graph_page';
+import ProfileRank_Page from './Components/pageRang/Profile_rank';
+import VoteNotLogin_page from './Components/pages/votenotLogin';
+import Rangnotlogin_page from './Components/pageRang/Rangnotlogin';
+import Showgraph_Page from './Components/Admin/showgraph';
+import Showuser_Page from './Components/Admin/showuser';
 
 const routers = createBrowserRouter([
   {
@@ -29,6 +34,18 @@ const routers = createBrowserRouter([
       {
         path: "/login",
         element: <Login_page />
+      },
+      {
+        path: "/notlogin",
+        element: <VoteNotLogin_page />
+      },
+      {
+        path: "/rangnotlogin",
+        element: <Rangnotlogin_page/>
+      },
+      {
+        path: "/showuser",
+        element: <Showuser_Page/>
       },
     ],
   },
@@ -60,6 +77,11 @@ const routers = createBrowserRouter([
       path: "/editprofile",
       element: <EditProfile_Page />
     },
+
+    {
+      path: "/showgraph",
+      element: <Showgraph_Page/>
+    },
     
     {
       path: "/vote2",
@@ -88,6 +110,10 @@ const routers = createBrowserRouter([
     {
       path: "/graph",
       element: <Graph_Page/>
+    },
+    {
+      path: "/profilerank",
+      element: <ProfileRank_Page />
     },
   ],
 }

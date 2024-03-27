@@ -5,7 +5,7 @@ import { GraphGEtRespose } from "../../model/graphGEtRespose";
 import { Service } from "../../servics/servic";
 import { BarChart } from "@mui/x-charts/BarChart";
 
-function Graph_Page() {
+function Showgraph_Page() {
   const [loading, setLoading] = useState(false);
   const [graph, setGraph] = useState<GraphGEtRespose[]>();
 
@@ -41,7 +41,7 @@ function Graph_Page() {
   const services = new Service();
   const navigates = useNavigate();
   function navigateTo() {
-    navigates("/rangtoday");
+    navigates("/admin");
   }
   return (
     <>
@@ -121,4 +121,4 @@ function Graph_Page() {
   );
 }
 
-export default Graph_Page;
+export default Showgraph_Page;

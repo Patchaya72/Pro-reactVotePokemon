@@ -16,7 +16,7 @@ const formData = new FormData();
   function navigateTo() {
     navigate("/info");
   }
-  function selectFile(event) {
+  function selectFile(event:any) {
     const file = event.target.files[0];
     
 
@@ -27,7 +27,9 @@ const formData = new FormData();
 
     reader.onload = function () {
       const preview = document.getElementById("preview");
-      preview.src = reader.result;
+      if (preview !== null && preview instanceof HTMLImageElement) {
+        preview.src = reader.result as string;
+    }
       
     };
     
@@ -129,12 +131,9 @@ const formData = new FormData();
   ) {
 
     const body = {
-
-      
       name: name ,
       Uid: id , 
       path: path , 
-
     };
 
     await services.postImg(body);

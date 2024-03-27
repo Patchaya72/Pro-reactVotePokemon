@@ -1,4 +1,6 @@
 import { AppBar, Toolbar, IconButton, Button, Box } from "@mui/material";
+import { AiFillSignal } from "react-icons/ai";
+import { GoSignOut } from "react-icons/go";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -24,24 +26,50 @@ function Header() {
         </IconButton>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Box>
-            <Button
-              className="prompt-light"
-              color="inherit"
-              component={Link}
-              to="/regis"
-            >
-              สมัครสมาชิก
+          <Button
+                className="prompt-light"
+                color="inherit"
+                component={Link}
+                to="/rangnotlogin"
+              >
+              <div>
+              <AiFillSignal style={{ color: "white", fontSize: "20px" }} />{" "}
+              </div>
             </Button>
           </Box>
-          <Box ml={1}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}></Box>
+          <Box>
             <Button
               className="prompt-light"
               color="inherit"
               component={Link}
-              to="/login"
+              to="/notlogin"
             >
-              เข้าสู่ระบบ
+              ลองโหวตดูไหม?
             </Button>
+          </Box>
+          <Box ml={1}></Box>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Box>
+              <Button
+                className="prompt-light"
+                color="inherit"
+                component={Link}
+                to="/regis"
+              >
+                สมัครสมาชิก
+              </Button>
+            </Box>
+            <Box ml={1}>
+              <Button
+                className="prompt-light"
+                color="inherit"
+                component={Link}
+                to="/login"
+              >
+                เข้าสู่ระบบ
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Toolbar>

@@ -2,13 +2,13 @@ import { Card, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Service } from "../../servics/servic";
 import { UsersGetRespose } from "../../model/UsersGetRespose";
-import { useState } from "react";
+// import { useState } from "react";
 
 function Editprofile_Page() {
   //ค่าตัวแปร
   let name = "";
   let password = "";
-  let confirmPassword = "";
+  // let confirmPassword = "";
   let filechk=""
 
 
@@ -23,7 +23,7 @@ function Editprofile_Page() {
     navigate("/info");
   }
 
-  function selectFile(event) {
+  function selectFile(event:any) {
     const file = event.target.files[0];
     filechk=file
     console.log(filechk);
@@ -36,8 +36,9 @@ function Editprofile_Page() {
 
     reader.onload = function () {
       const preview = document.getElementById("preview");
-      preview.src = reader.result;
-      
+      if (preview !== null && preview instanceof HTMLImageElement) {
+        preview.src = reader.result as string;
+    }
     };
     
     reader.readAsDataURL(file);
@@ -45,12 +46,7 @@ function Editprofile_Page() {
 
   async function upload(){
 
-
-
-
-    uploadImageOnFireBase(formData, user.id, name, password);
-    
-    
+    uploadImageOnFireBase(formData, user.id, name, password); 
   }
 
   return (
@@ -155,39 +151,51 @@ function Editprofile_Page() {
               <div
                 className="box"
                 onClick={() => {
-                  if (password == confirmPassword&&password != "") {
-                    upload();
-                    alert("Register Success!!");
-                  } else {
-                    alert("Password ไม่ตรงกัน กรุณาใส่ให้ตรงกัน");
-                  }
+                  // if (password == confirmPassword&&password != "") {
+                  //   upload();
+                  //   alert("Register Success!!");
+                  // } else {
+                  //   alert("Password ไม่ตรงกัน กรุณาใส่ให้ตรงกัน");
+                  // }
 
-                  // if(name==""&&password==""&&filechk==""){
-                  //   alert("คุณพี่ยังไม่ใส่อะไรเลยค่ะ!!!");
-                  // }
-                  // else if(name!=""&&password==""&&filechk==""){
-                  //   //อัพname
-                  //    editUser(name ,undefined,undefined,user.id);
-                  // }
-                  // else if (name!=""&&password!=""&&filechk==""){
-                  //    //อัพname and password
-                  //   editUser(name ,password,undefined,user.id);
-                  // }
-                  // else if (name!=""&&password!=""&&filechk!=""){
-                  //     //อัพทั้งหมด
-                  //   upload();
-                  // }
-                  // else if (name==""&&password==""&&filechk==""){
-                  //    //อัพทั้งหมด
-                  //   upload();
-                  // }
+                  if(name==""&&password==""&&filechk==""){
+                    alert("คุณพี่ยังไม่ใส่อะไรเลยค่ะ!!!");
+                  }
+                  else if(name!=""&&password==""&&filechk==""){
+                    //อัพname
+                     editUser(name ,undefined,undefined,user.id);
+                  }
+                  else if (name!=""&&password!=""&&filechk==""){
+                     //อัพname and password
+                    editUser(name ,password,undefined,user.id);
+                  }
+                  else if (name!=""&&password!=""&&filechk!=""){
+                      //อัพทั้งหมด
+                    upload();
+                  }
+                  else if (name==""&&password!=""&&filechk==""){
+                    //อัพ Pssworkd 
+                    editUser(undefined ,password,undefined,user.id);
+                 }
+                 else if (name==""&&password==""&&filechk!=""){
+                  //อัพไฟล์อันเดียว
+                  uploadImageOnFireBase(formData, user.id,undefined, undefined); 
+               }
+               else if (name!=""&&password==""&&filechk!=""){
+                //อัพ  name and filechk
+                uploadImageOnFireBase(formData, user.id,name, undefined); 
+             }
+             else if (name==""&&password!=""&&filechk!=""){
+              //อัพ  password and filechk
+              uploadImageOnFireBase(formData, user.id,undefined, password); 
+           }
                 }}
               >
                 <a className="button" href="#popup1">
                   Edit
                 </a>
               </div>
-              <div id="popup1" className="overlay">
+              {/* <div id="popup1" className="overlay">
                 <div className="popup">
                   <h2>คุณทำการแก้ไขสำเร็จแล้ว</h2>
                   <a className="close" href="#">
@@ -206,7 +214,7 @@ function Editprofile_Page() {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </form>
         </Card>
@@ -268,8 +276,8 @@ function Editprofile_Page() {
   async function uploadImageOnFireBase(
     data: FormData,
     id: number,
-    name: string,
-    password: string
+    name: string| undefined,
+    password: string| undefined,
   ) {
     console.log("ImageOnfireBase: " + data);
     

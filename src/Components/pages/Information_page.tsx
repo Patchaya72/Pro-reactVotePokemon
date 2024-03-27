@@ -1,4 +1,4 @@
-import { Card, CardMedia, Grid } from "@mui/material";
+import { Card, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { UsersGetRespose } from "../../model/UsersGetRespose";
 import { PicturePostRequest } from "../../model/picturePostRequest";
@@ -8,7 +8,7 @@ import { Service } from "../../servics/servic";
 function Infomation_Page() {
   const user: UsersGetRespose = JSON.parse(localStorage.getItem("objUser")!);
   const [images, setImage] = useState<PicturePostRequest[]>([]);
-  console.log(user.id);
+  console.log("Uid:"+user.id);
   console.log(user.email);
   const services = new Service();
 
@@ -18,7 +18,8 @@ function Infomation_Page() {
       const Imgs: PicturePostRequest[] = res;
       setImage(Imgs);
       console.log(Imgs);
-      
+      console.log(user.id);
+
     };
     loadDataAsync();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,17 +31,33 @@ function Infomation_Page() {
   const navigatesss = useNavigate();
 
   function navigateToEditProfile() {
-    navigate("/editprofile");
+    navigate("/editprofile/");
   }
 
-  function navigateToEditImage() {
-    navigates("/editimage");
+  function navigateToEditImage(Uid:number,ImgID:number) {
+    navigates(`/editimage?Uid=${Uid}&ImgID=${ImgID}`);
   }
   function navigateToBackVote() {
     navigatess("/vote");
   }
   function navigateToAddimage() {
     navigatesss("/addimage");
+  }
+  function chkBtn(num:number) {
+    if (num < 5) {
+      return(<div onClick={navigateToAddimage}>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <img
+          src="https://www.shutterstock.com/image-vector/premium-picture-icon-logo-line-600nw-749844106.jpg"
+          style={{
+            width: "190px",
+            height: "170px", // Maintain aspect ratio
+          }}
+        />
+      </div>)
+    }else{
+      return <div></div>
+    }
   }
 
   return (
@@ -152,121 +169,34 @@ function Infomation_Page() {
               alignItems: "center",
             }}
           >
-            <Grid container spacing={2}>
-              {images?.map((image, index) => (
-                <Grid item xs={2.4} key={index}>
-                  <CardMedia
-                    sx={{
-                      height: 160,
-                      width: 160,
-                      borderRadius: 5,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      border: "2px solid white",
-                    }}
-                    onClick={() => {
-                      navigateToEditImage   
-                    }}
-                    image={image.path}
-                  />
-                </Grid>
-              ))}
-
-              {/* <Grid item xs={1.8}>
-  <div style={{ backgroundColor: "white", borderRadius: 15 }}>
-    <Box
-      sx={{
-        height: 160,
-        width: 160,
-        borderRadius: 5,
-        borderColor: "white",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <AddPhotoAlternateOutlinedIcon
-        sx={{
-          height: 100,
-          width: 100,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginLeft: "10px",
-        }}
-      />
-    </Box>
-  </div>
-</Grid> */}
-            </Grid>
-
-            {/* <div
-              style={{ display: "flex", alignItems: "center" }}
-              onClick={navigateToEditImage}
-            >
-              <div
-                style={{
-                  marginRight: "20px",
-                  borderRadius: "50%",
-                  display: "inline-block",
-                }}
-              >
-                <img
-                  onClick={navigateToEditImage}
-                  src="https://i.pinimg.com/originals/62/59/42/625942fdc8068bd3d0fea31a30127bae.gif"
-                  style={{
-                    width: "190px",
-                    height: "170px", // Maintain aspect ratio
-                  }}
-                />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <img
-                  src="https://i.pinimg.com/originals/56/7b/a2/567ba2a18bf90a700f9064cac00cb118.gif"
-                  style={{
-                    width: "190px",
-                    height: "170px", // Maintain aspect ratio
-                  }}
-                />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <img
-                  src="https://i.pinimg.com/originals/b9/f4/e2/b9f4e2745f4d751efce77237c5cdb5e0.gif"
-                  style={{
-                    width: "190px",
-                    height: "170px", // Maintain aspect ratio
-                  }}
-                />
-              </div>
-              <div
-                style={{
-                  textAlign: "left",
-                  display: "inline-block",
-                  verticalAlign: "top",
-                }}
-              ></div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              ></div>
-            </div> */}
-            <div onClick={navigateToAddimage}>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <img
-                src="https://www.shutterstock.com/image-vector/premium-picture-icon-logo-line-600nw-749844106.jpg"
-                style={{
-                  width: "190px",
-                  height: "170px", // Maintain aspect ratio
-                }}
-              />
+            <div>
+              <Grid container spacing={2}>
+                {images?.map((image, index) => (
+                  <Grid xs={2.4} key={index}>
+                    <div>
+                      <img
+                        src={image.path}
+                        style={{
+                          height: "160px",
+                          width: "160px",
+                          
+                        }}
+                        onClick={()=>{
+                          navigateToEditImage(
+                            image.Uid,image.id
+                          )
+                        }}
+                      />
+                    </div>
+                  </Grid>
+                ))}
+              </Grid>
             </div>
+            {chkBtn(images.length)}
           </Card>
         </div>
       </div>
     </div>
   );
 }
-
 export default Infomation_Page;

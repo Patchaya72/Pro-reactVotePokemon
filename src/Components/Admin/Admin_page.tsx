@@ -1,6 +1,12 @@
 import { Card } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
 function Admin_page() {
+  const navigate = useNavigate();
+
+  function navigateTo() {
+    navigate("/showgraph");
+  }
 
   return (
     <div
@@ -21,13 +27,13 @@ function Admin_page() {
     >
       
       <div style={{ display: "flex",marginRight: "290px" ,marginTop: "-295px",}}>
-        <div style={{ display: "flex" }}>
-          <Card
+        <div style={{ display: "flex" }} >
+          <Card  component={Link} to="/showuser"
             sx={{
               backgroundColor: "rgba(255, 255, 255, 0.50)",
               padding: "40px",
               borderRadius: "30px",
-              marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
+              marginRight: "1000px", // เพิ่มระยะห่างด้านขวาของการ์ด
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -37,106 +43,6 @@ function Admin_page() {
           >
             <img
               src="https://i.pinimg.com/564x/76/75/0b/76750b7f544fd416ed2e07aed414ea7d.jpg"
-              style={{
-                width: "100px",
-                height: "100px",
-                borderRadius: "49px",
-              }}
-            />
-            <div className="prompt-light" style={{ marginTop: "20px" }}>
-              <h3>Umbreon</h3>
-              </div>
-          </Card>
-          <Card
-            sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.50)",
-              padding: "40px",
-              borderRadius: "30px",
-              marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <img
-              src="https://i.pinimg.com/564x/be/ef/96/beef96d6dd36a8a45221ea41a9d9e7f0.jpg"
-              style={{
-                width: "100px",
-                height: "100px",
-                borderRadius: "49px",
-              }}
-            />
-            <div className="prompt-light" style={{ marginTop: "20px" }}>
-              <h3>Umbreon</h3>
-              </div>
-          </Card>
-          <Card
-            sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.50)",
-              padding: "40px",
-              borderRadius: "30px",
-              marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <img
-              src="https://i.pinimg.com/564x/1b/fe/df/1bfedf18ae5cd1c74c0332ddd8872a02.jpg"
-              style={{
-                width: "100px",
-                height: "100px",
-                borderRadius: "49px",
-              }}
-            />
-            <div className="prompt-light" style={{ marginTop: "20px" }}>
-              <h3>Umbreon</h3>
-              </div>
-          </Card>
-          <Card
-            sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.50)",
-              padding: "40px",
-              borderRadius: "30px",
-              marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <img
-              src="https://i.pinimg.com/564x/11/7d/1f/117d1f47e76f93d8f001582c58bb6eb9.jpg"
-              style={{
-                width: "100px",
-                height: "100px",
-                borderRadius: "49px",
-              }}
-            />
-            <div className="prompt-light" style={{ marginTop: "20px" }}>
-              <h3>Umbreon</h3>
-              </div>
-          </Card>
-          <Card
-            sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.50)",
-              padding: "40px",
-              borderRadius: "30px",
-              marginRight: "20px", // เพิ่มระยะห่างด้านขวาของการ์ด
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <img
-              src="https://i.pinimg.com/564x/be/d3/d9/bed3d922e2a6e8635d43cb479ff8955e.jpg"
               style={{
                 width: "100px",
                 height: "100px",
